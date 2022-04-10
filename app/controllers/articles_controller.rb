@@ -22,9 +22,10 @@ class ArticlesController < ApplicationController
   # POST /articles
   def create
     @article = Article.new(article_params)
-
-    if @article.save
-      redirect_to @article, notice: 'Article was successfully created.'
+    if @article.photo.attached?
+      if @article.save
+        redirect_to @article, notice: 'Article was successfully created.'
+      end
     else
       render :new
     end
